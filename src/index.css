@@ -209,7 +209,12 @@ h1 em { font-style: italic; font-weight: 460; }
 .filters button.on { background: var(--ink); color: var(--cream); border-color: var(--ink); }
 .filter-gap { width: 12px; }
 
-.page { max-width: 1240px; }
+.page {
+  max-width: none;
+  width: 100%;
+  padding-left: clamp(20px, 3vw, 36px);
+  padding-right: clamp(20px, 3vw, 36px);
+}
 .venue-hero {
   min-height: 520px;
   display: flex;
@@ -264,11 +269,16 @@ cite { font-style: normal; color: var(--muted); font-size: 13px; letter-spacing:
 }
 .gem h2 { margin: 0; font-size: 36px; }
 .gem-meters label { display: flex; justify-content: space-between; font-size: 13px; margin-top: 8px; }
-.digest-grid { grid-template-columns: 1.4fr 1fr 1fr; }
+.digest .page-head { max-width: none; }
+.digest-grid {
+  width: 100%;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
 .digest-card {
-  min-height: 280px;
-  border-radius: 24px;
-  padding: 22px;
+  min-height: 460px;
+  border-radius: 0;
+  padding: 28px;
   color: white;
   display: flex;
   flex-direction: column;
@@ -276,11 +286,18 @@ cite { font-style: normal; color: var(--muted); font-size: 13px; letter-spacing:
   background-size: cover;
   background-position: center;
 }
-.digest-card.lead { grid-row: span 2; min-height: 576px; }
-.digest-card span { letter-spacing: 0.14em; text-transform: uppercase; font-size: 12px; color: #f0b59a; }
-.digest-card h2 { margin: 8px 0; font-size: 36px; }
+.digest-card.lead { grid-row: auto; min-height: 460px; }
+.digest-card span { letter-spacing: 0.16em; text-transform: uppercase; font-size: 11px; color: #f0b59a; }
+.digest-card h2 { margin: 10px 0 8px; font-size: clamp(32px, 2.6vw, 48px); max-width: 12ch; }
 .digest-card p, .digest-card em { margin: 0; }
-.digest-card em { margin-top: 8px; opacity: 0.8; }
+.digest-card p {
+  max-width: 36ch;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.digest-card em { margin-top: 12px; opacity: 0.86; font-style: italic; font-family: var(--serif); }
 
 .city-grid { grid-template-columns: 1fr 1fr; }
 .city { background: var(--paper-2); border: 1px solid var(--line); border-radius: 24px; border-top: 1px solid var(--line); }
@@ -368,7 +385,7 @@ cite { font-style: normal; color: var(--muted); font-size: 13px; letter-spacing:
   .split, .grid-3, .dim-grid, .band, .venue-layout, .taste-layout, .classic-intro, .gem, .city-grid, .digest-grid, .personality > div, .grid-2 {
     grid-template-columns: 1fr;
   }
-  .digest-card.lead { grid-row: auto; min-height: 320px; }
+  .digest-card, .digest-card.lead { min-height: 320px; }
   .nav { flex-direction: column; align-items: flex-start; }
   .section-head { grid-template-columns: 1fr; }
   h1 { font-size: 46px; }
