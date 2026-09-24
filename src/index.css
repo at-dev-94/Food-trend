@@ -1,14 +1,14 @@
 :root {
-  --paper: #f3eee6;
-  --paper-2: #faf7f2;
-  --ink: #14110e;
-  --ink-soft: #3c342c;
-  --muted: #7b7166;
-  --line: rgba(20, 17, 14, 0.12);
-  --copper: #e25c2a;
-  --copper-deep: #9a3412;
-  --night: #14110e;
-  --cream: #f6f1e8;
+  --paper: #f6f1ea;
+  --paper-2: #fffdf9;
+  --ink: #11100e;
+  --ink-soft: #3a342c;
+  --muted: #7a7168;
+  --line: rgba(17, 16, 14, 0.14);
+  --copper: #c4512c;
+  --copper-deep: #8d3418;
+  --night: #11100e;
+  --cream: #f4efe6;
   --serif: "Fraunces", "Times New Roman", serif;
   --sans: "Outfit", "Avenir Next", sans-serif;
   --shadow: 0 24px 60px rgba(20, 17, 14, 0.08);
@@ -313,6 +313,47 @@ cite { font-style: normal; color: var(--muted); font-size: 13px; letter-spacing:
 .rec .order { font-family: var(--serif); font-style: italic; color: var(--ink); margin-top: 6px; }
 .rec strong { font-family: var(--serif); font-size: 36px; }
 .composer { max-width: 760px; margin-top: 8px; }
+
+.cover {
+  min-height: 88vh;
+  margin: 0;
+  padding: 10vh 8vw 8vh;
+  color: #f6f1ea;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+.cover h1 { color: #f6f1ea; max-width: 12ch; font-size: clamp(64px, 8vw, 112px); }
+.cover .lede { color: rgba(246, 241, 234, 0.82); }
+.cover .eyebrow, .cover .ask label { color: #f0b59a; }
+.cover .ask div { background: rgba(246, 241, 234, 0.96); color: var(--ink); }
+.ticker {
+  display: flex;
+  gap: 28px;
+  list-style: none;
+  margin: 0;
+  padding: 14px 32px;
+  border-bottom: 1px solid var(--line);
+  overflow: hidden;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-size: 11px;
+  color: var(--muted);
+}
+.nav a { border-radius: 0; letter-spacing: 0.12em; text-transform: uppercase; font-size: 11px; }
+.card, .split article, .gem, .rec, .city, .classic-intro { border-radius: 0; }
+.card-photo { height: 320px; }
+.mti { border-radius: 0; }
+.plans { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.plans article { border-top: 1px solid var(--ink); padding: 24px 8px; background: var(--paper-2); }
+.plans h2 { font-size: 42px; margin: 0 0 12px; }
+.plans ul { margin: 0; padding-left: 18px; color: var(--ink-soft); }
+@media (max-width: 980px) {
+  .plans { grid-template-columns: 1fr; }
+  .cover h1 { font-size: 52px; }
+}
 .empty { color: var(--muted); }
 
 .foot {

@@ -629,6 +629,41 @@ export const digest = {
   ],
 };
 
+export const details = {
+  herdwick: { address: "14 Bridge Road, Kirkstall, Leeds LS5 3BW", spend: "£18–£34 a head", hours: "Wed–Sun, kitchen from 12:00" },
+  "smoke-rafter": { address: "Unit 3, Blossom Street, Ancoats, Manchester M4 5AU", spend: "£24–£38 a head", hours: "Tue–Sat, from 17:30" },
+  "glossy-gravy": { address: "88 Harrogate Road, Chapel Allerton, Leeds LS7 4LZ", spend: "£22–£32 a head", hours: "Sunday sittings 12:00 and 15:00" },
+  "harbour-line": { address: "Fore Street, Port Isaac, Cornwall PL29 3RB", spend: "£48–£68 a head", hours: "Thu–Mon, two sittings" },
+  arches: { address: "Railway arch 12, St Jude’s, Bristol BS2 0HH", spend: "£6–£16", hours: "Fri–Sun, from 08:00 until sold out" },
+  "low-light": { address: "221 Wilmslow Road, Rusholme, Manchester M14 5LQ", spend: "£12–£22 a head", hours: "Daily, 12:00–23:00" },
+  "salt-goose": { address: "47 Tanner Street, Bermondsey, London SE1 3PL", spend: "£52–£72 a head", hours: "Wed–Sat, from 18:00" },
+  "plough-counter": { address: "Trelill Farm Shop, near Padstow, Cornwall PL27 7SD", spend: "£4–£14", hours: "Daily, 09:00–16:00" },
+  rarebit: { address: "9 North Street, Southville, Bristol BS3 1HT", spend: "£14–£28 a head", hours: "Tue–Sun, from 12:00" },
+  "station-pie": { address: "3 Water Lane, Holbeck, Leeds LS11 5QN", spend: "£8–£12", hours: "Mon–Sat, 11:30–15:00 and 17:00–20:30" },
+  "chip-chapel": { address: "Wharf Road, St Ives, Cornwall TR26 1LF", spend: "£11–£18", hours: "Daily, 11:30–20:00" },
+  "dawn-plate": { address: "18 Mare Street, Hackney, London E8 4RT", spend: "£14–£24", hours: "Daily, 08:00–14:30" },
+  "velvet-tandoor": { address: "60 Thomas Street, Northern Quarter, Manchester M4 1EG", spend: "£22–£36 a head", hours: "Daily, from 17:00" },
+  "orchard-inn": { address: "Chew Hill, Chew Valley, Somerset BS40 8QE", spend: "£38–£58 a head", hours: "Fri–Sun, book the fire table" },
+};
+
+export const plans = [
+  {
+    name: "Free",
+    price: "£0",
+    points: ["Limited searches", "City discovery", "Weekly Taste Memory digest"],
+  },
+  {
+    name: "Premium",
+    price: "£6 / month",
+    points: ["Unlimited discovery", "Hidden gems and destination restaurants", "Personal taste profile", "Saved taste memories", "Travel food planning"],
+  },
+  {
+    name: "B2B",
+    price: "Taste intelligence",
+    points: ["Tourism boards and hotels", "Restaurant groups and festivals", "Publishers and concierge desks", "API for hospitality analytics"],
+  },
+];
+
 export function getVenue(id) {
   return venues.find((v) => v.id === id);
 }

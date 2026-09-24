@@ -5,9 +5,11 @@ const links = [
   ["Ask", "/ask"],
   ["Classics", "/classics"],
   ["Gems", "/gems"],
+  ["Journey", "/journey"],
   ["Digest", "/digest"],
   ["Map", "/map"],
   ["Taste", "/taste"],
+  ["Membership", "/membership"],
 ];
 
 export default function Shell() {
@@ -35,8 +37,7 @@ export default function Shell() {
           <p>Don’t follow the crowd. Find the taste people remember.</p>
         </div>
         <p className="fine">
-          A taste-intelligence prototype. Scores are modelled on the Memorable Taste Index — sensory
-          language, dish agreement, recall, return intent and momentum — not star ratings.
+          Memorable Taste Index — sensory language, dish agreement, emotional recall, return intent and momentum. Popularity is not the ranking.
         </p>
       </footer>
     </>
@@ -61,7 +62,7 @@ export function VenueCard({ venue }) {
           ))}
         </ul>
         <div className="card-meta">
-          <span>{venue.priceBand}</span>
+          <span>{venue.priceBand} · under £{venue.ceiling}</span>
           <span>{venue.hiddenGem ? "Hidden gem" : venue.journey ? "Worth the journey" : venue.type}</span>
         </div>
       </div>

@@ -1,6 +1,6 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Link, useNavigate, useParams, useSearchParams } from "react-router-dom";
-import { classics, cities, digest, dimensions, getVenue, prompts, venues } from "./data";
+import { classics, cities, details, digest, dimensions, getVenue, plans, prompts, venues } from "./data";
 import { interpret, recommend, tasteMatch } from "./engine";
 import { Radar, Spark, VenueCard } from "./components";
 
@@ -29,22 +29,21 @@ export function Home() {
   const featured = [...venues].sort((a, b) => b.mti - a.mti).slice(0, 3);
   return (
     <>
-      <section className="hero">
-        <p className="eyebrow">Taste intelligence · United Kingdom</p>
+      <section className="cover" style={{ backgroundImage: "linear-gradient(90deg, rgba(12,10,8,.78), rgba(12,10,8,.2)), url(/photos/dining.jpg)" }}>
+        <p className="eyebrow">Issue 04 · United Kingdom</p>
         <h1>
           Find the food you’ll still be <em>thinking about</em> tomorrow.
         </h1>
         <p className="lede">
-          Most discovery ranks popularity. Memorable Taste reads sensory language, the dish people
-          name twice, and the sentence that says they would go back. A search engine for food worth remembering.
+          A search engine for food worth remembering. Sensory language, the dish people name twice, and the sentence that says they would go back.
         </p>
         <AskForm />
-        <ul className="hero-stats">
-          <li><strong>MTI</strong><span>Memorable Taste Index</span></li>
-          <li><strong>6</strong><span>Radar signals</span></li>
-          <li><strong>5</strong><span>City taste maps</span></li>
-        </ul>
       </section>
+      <ul className="ticker" aria-hidden>
+        {["Charred", "Silky", "Fermented", "Worth the journey", "Hidden gem", "Still thinking about it", "Crisp pastry", "Return intent"].map((word) => (
+          <li key={word}>{word}</li>
+        ))}
+      </ul>
 
       <section className="split">
         <article>
@@ -239,6 +238,17 @@ export function Ask() {
 export function Venue() {
   const { id } = useParams();
   const venue = getVenue(id);
+  const [saved, setSaved] = useState(false);
+  useEffect(() => {
+    const ids = JSON.parse(localStorage.getItem("mt-saves") || "[]");
+    setSaved(ids.includes(id));
+  }, [id]);
+  function toggleSave() {
+    const ids = JSON.parse(localStorage.getItem("mt-saves") || "[]");
+    const next = ids.includes(id) ? ids.filter((item) => item !== id) : [...ids, id];
+    localStorage.setItem("mt-saves", JSON.stringify(next));
+    setSaved(next.includes(id));
+  }
   if (!venue) return <section className="page"><h1>Venue not in the index.</h1></section>;
   const rows = [
     ["Sensory density", venue.radar.sensory],
@@ -260,6 +270,9 @@ export function Venue() {
           <p className="kicker">Signature</p>
           <h2>{venue.dish.name}</h2>
           <dl className="facts">
+            <div><dt>Address</dt><dd>{details[venue.id]?.address}</dd></div>
+            <div><dt>Spend</dt><dd>{details[venue.id]?.spend}</dd></div>
+            <div><dt>Hours</dt><dd>{details[venue.id]?.hours}</dd></div>
             <div><dt>Protein</dt><dd>{venue.dish.protein}</dd></div>
             <div><dt>Method</dt><dd>{venue.dish.method}</dd></div>
             <div><dt>Sauce</dt><dd>{venue.dish.sauce}</dd></div>
@@ -280,6 +293,7 @@ export function Venue() {
         <aside>
           <p className="kicker">Memorable Taste Index</p>
           <p className="big-score">{venue.mti}</p>
+          <button className="btn" type="button" onClick={toggleSave}>{saved ? "Saved to taste memories" : "Save this taste memory"}</button>
           <Radar radar={venue.radar} />
           <ul className="bars">
             {rows.map(([label, value]) => (
@@ -485,6 +499,41 @@ export function Taste() {
   );
 }
 
-export function useQueryCity() {
-  return interpret;
+export function Journey() {
+  const list = venues.filter((venue) => venue.journey);
+  return (
+    <section className="page">
+      <header className="page-head">
+        <p className="kicker">Destination eating</p>
+        <h1>Worth travelling for.</h1>
+        <p>Diners who write “worth the drive”, “we came from Exeter”, or “made a special trip”. Geographic commitment, not a local convenience score.</p>
+      </header>
+      <div className="grid-3">
+        {list.map((venue) => <VenueCard key={venue.id} venue={venue} />)}
+      </div>
+    </section>
+  );
+}
+
+export function Membership() {
+  return (
+    <section className="page">
+      <header className="page-head">
+        <p className="kicker">Membership</p>
+        <h1>Taste intelligence, at three depths.</h1>
+        <p>Free discovery for the weekly habit. Premium for hidden gems, journeys and a personal taste graph. A B2B API for tourism boards, hotels and hospitality groups.</p>
+      </header>
+      <div className="plans">
+        {plans.map((plan) => (
+          <article key={plan.name}>
+            <p className="kicker">{plan.name}</p>
+            <h2>{plan.price}</h2>
+            <ul>
+              {plan.points.map((point) => <li key={point}>{point}</li>)}
+            </ul>
+          </article>
+        ))}
+      </div>
+    </section>
+  );
 }
