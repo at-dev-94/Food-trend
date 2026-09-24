@@ -1,13 +1,21 @@
 import { useMemo, useState } from "react";
-import { Link, useParams, useSearchParams } from "react-router-dom";
+import { Link, useNavigate, useParams, useSearchParams } from "react-router-dom";
 import { classics, cities, digest, dimensions, getVenue, prompts, venues } from "./data";
 import { interpret, recommend, tasteMatch } from "./engine";
 import { Radar, Spark, VenueCard } from "./components";
 
 function AskForm({ initial = "", compact = false }) {
   const [value, setValue] = useState(initial);
+  const navigate = useNavigate();
   return (
-    <form className={compact ? "ask ask-compact" : "ask"} action="/ask" method="get">
+    <form
+      className={compact ? "ask ask-compact" : "ask"}
+      onSubmit={(event) => {
+        event.preventDefault();
+        const query = value.trim();
+        navigate(query ? `/ask?q=${encodeURIComponent(query)}` : "/ask");
+      }}
+    >
       <label htmlFor="q">Ask for food worth remembering</label>
       <div>
         <input id="q" name="q" value={value} onChange={(e) => setValue(e.target.value)} placeholder="Somewhere punchy in Manchester, under £40…" />
